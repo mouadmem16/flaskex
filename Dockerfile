@@ -1,7 +1,6 @@
-FROM python:3.8-slim-buster
+FROM python:slim
 
 WORKDIR /python-docker
-USER root
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 RUN touch accounts.db && chmod 777 accounts.db
