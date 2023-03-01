@@ -1,7 +1,15 @@
-FROM python:slim
+FROM python:3-alpine
 
+# Create app directory
 WORKDIR /app
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt && touch accounts.db && chown www-data:www-data accounts.db
+
+# Install app dependencies
+COPY requirements.txt ./
+
+RUN pip install -r requirements.txt
+
+# Bundle app source
 COPY . .
-CMD [ "python3", "app.py"]
+
+EXPOSE 5000
+CMD [ "flask", "run","--host","0.0.0.0","--port","5000"]
